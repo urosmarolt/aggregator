@@ -1,0 +1,8 @@
+flask
+pymongo
+Pillow
+flask-admin
+flask-mongoengine
+Flask-Login
+flask-paginate
+flask_bootstrap

@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"newsItems.user"},{"v":1,"unique":true,"key":{"login":1},"name":"login_1","ns":"newsItems.user","sparse":false,"background":false}]}
