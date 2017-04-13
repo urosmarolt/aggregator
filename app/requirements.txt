@@ -6,3 +6,5 @@ flask-mongoengine
 Flask-Login
 flask-paginate
 flask_bootstrap
+eventregistry
+apscheduler

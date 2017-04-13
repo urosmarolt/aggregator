@@ -197,7 +197,7 @@ def main():
     page = request.args.get('page', type=int, default=1)
 
     skip = (page*5)-5
-    results = db.post.find().sort([("date", -1), ("time", -1)]).skip(skip).limit(5)
+    results = db.post.find().sort([("datetime", -1)]).skip(skip).limit(5)
     for item in results:
         newsItems.append(item)
 
