@@ -207,9 +207,16 @@ def main():
 
     pagination = Pagination( page=page, total=results.count(), record_name='records')
 
-    return render_template('index.html', newsItems = newsItems, configItems = configItems, pagination = pagination, pages = getPages())
+    import re
+    s = "Example String"
+    pagination_links = re.sub("<ul>", "<ul class='pager'>", pagination.links)
+    #print(replaced)
+    #pagination.links.replace("<ul>", "<ul class='pager'>")
+    print(pagination_links)
 
+    return render_template('index.html', newsItems = newsItems, configItems = configItems, pagination = pagination,pagination_links = pagination_links, pages = getPages())
 
+"""
 @app.route('/adminindex/')
 def index():
     return render_template('adminIndex.html', user=login.current_user)
@@ -245,7 +252,7 @@ def logout_view():
     login.logout_user()
     return redirect(url_for('index'))
 
-
+"""
 
 def getPages():
     db = client.newsItems
@@ -262,10 +269,10 @@ def inject_now():
 
 if __name__ == "__main__":
     # Initialize flask-login
-    init_login()
-    admin = Admin(app, 'Example: Aggregator', template_mode='bootstrap3')
-    admin.add_view(PostView(Post))
-    admin.add_view(ConfigView(Config))
-    admin.add_view(PageView(Page))
+    #init_login()
+    #admin = Admin(app, 'Example: Aggregator', template_mode='bootstrap3')
+    #admin.add_view(PostView(Post))
+    #admin.add_view(ConfigView(Config))
+    #admin.add_view(PageView(Page))
     #admin.add_view(MyModelView(User))
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5050)

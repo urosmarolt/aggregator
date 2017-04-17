@@ -10,19 +10,16 @@ db = client.newsItems
 def pullItems():
     query = db.config.find().limit(1)
     er = EventRegistry()
-    er.login(query[0]['loginUser'], query[0]['loginPass'])
+    #er.login(query[0]['loginUser'], query[0]['loginPass'])
 
 
     q = QueryArticles()
     # related to Python
     q.addCategory("dmoz/" + query[0]['aggregatorCategory'])
+    q.addKeyword(query[0]['aggregatorKeyword'])
     q.addConcept(er.getConceptUri(query[0]['aggregatorTheme']))
     # return details about the articles
-    q.addRequestedResult(RequestArticlesInfo(count=150,
-                                             returnInfo=ReturnInfo(
-                                                 articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,
-                                                                              categories=False, location=False,
-                                                                              image=True))))
+    q.addRequestedResult(RequestArticlesInfo(count=150,returnInfo=ReturnInfo(articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,categories=False, location=False,image=True))))
     # execute the query
     res = er.execQuery(q)
 
