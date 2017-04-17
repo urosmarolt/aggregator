@@ -212,7 +212,7 @@ def main():
     pagination_links = re.sub("<ul>", "<ul class='pager'>", pagination.links)
     #print(replaced)
     #pagination.links.replace("<ul>", "<ul class='pager'>")
-    print(pagination_links)
+    #print(pagination_links)
 
     return render_template('index.html', newsItems = newsItems, configItems = configItems, pagination = pagination,pagination_links = pagination_links, pages = getPages())
 
@@ -275,4 +275,4 @@ if __name__ == "__main__":
     #admin.add_view(ConfigView(Config))
     #admin.add_view(PageView(Page))
     #admin.add_view(MyModelView(User))
-    app.run(host='0.0.0.0', debug=True, port=5050)
+    app.run(host='0.0.0.0', debug=True, port=5000)
