@@ -14,19 +14,18 @@ def pullItems():
 
 
     q = QueryArticles()
-    # related to Python
     q.addCategory("dmoz/" + query[0]['aggregatorCategory'])
     q.addKeyword(query[0]['aggregatorKeyword'])
     q.addConcept(er.getConceptUri(query[0]['aggregatorTheme']))
     # return details about the articles
-    q.addRequestedResult(RequestArticlesInfo(count=150,returnInfo=ReturnInfo(articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,categories=False, location=False,image=True))))
+    q.addRequestedResult(RequestArticlesInfo(count=50,returnInfo=ReturnInfo(articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,categories=False, location=False,image=True))))
     # execute the query
     res = er.execQuery(q)
 
     for item in res['articles']['results']:
+        print(item)
         try:
             #cleanup dict raw data structure
-            del item["isDuplicate"]
             del item["sim"]
             del item["duplicateList"]
             del item["wgt"]
@@ -41,8 +40,10 @@ def pullItems():
             del item["time"]
             item["sourceID"] = item["id"]
             del item["id"]
-
-            saveToDB(item)
+            print(item["isDuplicate"])
+            if item["isDuplicate"] == False:
+                del item["isDuplicate"]
+                saveToDB(item)
         except Exception as e:
             print("Error \n %s" % (e))
 
