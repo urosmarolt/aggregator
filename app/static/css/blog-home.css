@@ -47,3 +47,19 @@ footer {
 .pager .active a {
     background-color: #eee;
 }
+
+.twitter-feed {
+    list-style:none;
+    padding-left:0;
+}
+
+.twitter-tweet {
+    color: #233d4a;
+    background-color: #fff;
+    border-color: #bce8f1;
+    width: 340px;
+    list-style-type: none;
+    border-radius: 10px;
+    padding: 7px 7px 0px 7px;
+}
+

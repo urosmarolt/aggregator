@@ -7,4 +7,6 @@ Flask-Login
 flask-paginate
 flask-bootstrap
 eventregistry
-airflow
+flask-sitemap
+Twitter
+#airflow
