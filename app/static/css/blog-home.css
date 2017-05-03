@@ -51,6 +51,9 @@ footer {
 .twitter-feed {
     list-style:none;
     padding-left:0;
+    overflow: scroll;
+    height: 300px;
+    width: 340px;
 }
 
 .twitter-tweet {

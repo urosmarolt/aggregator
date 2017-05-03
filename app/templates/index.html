@@ -100,7 +100,7 @@
                 <!-- Blog Twitter Widget -->
                 <div class="well">
                     <h4>#fakeNews</h4>
-                    <div class="row">
+                    <div class="row pre-scrollable">
                         <div class="col-md-5">
                         <ul class="twitter-feed">
                             {% for t in tweets %}
@@ -108,11 +108,7 @@
                                 <p>
                                     {{ t.text }}
                                     <br>
-                                    <strong>@{{ t.user.screen_name }}</strong>
-                                    | <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}" target="_blank" rel="nofollow,noindex">link</a>
-                                    <br>
-                                    {{t.created_at|strftime}}
-
+                                     <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}" target="_blank" rel="nofollow,noindex"><span class="label label-info">@{{ t.user.screen_name }}</span></a> | <span class="label label-info">{{t.created_at|strftime}}</span>
                                     {% if t.entities.urls%}
                                     <br>
                                     <i>tweet links</i>
