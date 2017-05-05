@@ -74,7 +74,7 @@ def main():
     page = request.args.get('page', type=int, default=1)
 
     # search with query term and return 10
-    t_results = twitter.search.tweets(q='fakeNews potus', count=10)
+    t_results = twitter.search.tweets(q='#fakeNews #potus', count=10)
 
     # return jsonify(results)
     # app.logger.debug(results)

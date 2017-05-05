@@ -49,9 +49,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {% for page in pages %}
-                    <li>
-                        <a href="{{ page.url }}">{{ page.title }}</a>
-                    </li>
+                        {% if page.active == 1 %}
+                        <li>
+                            <a href="{{ page.url }}">{{ page.title }}</a>
+                        </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
@@ -109,15 +111,6 @@
                                     {{ t.text }}
                                     <br>
                                      <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}" target="_blank" rel="nofollow,noindex"><span class="label label-info">@{{ t.user.screen_name }}</span></a> | <span class="label label-info">{{t.created_at|strftime}}</span>
-                                    {% if t.entities.urls%}
-                                    <br>
-                                    <i>tweet links</i>
-                                    <ol>
-                                        {% for url in t.entities.urls %}
-                                        <li><a href="{{url.expanded_url}}" target="_blank" rel="nofollow,noindex">{{url.expanded_url}}</a></li>
-                                        {% endfor %}
-                                    </ol>
-                                    {% endif %}
                                 </p>
                             </li>
                             {% endfor %}
