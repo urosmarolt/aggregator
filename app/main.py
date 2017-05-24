@@ -37,6 +37,7 @@ class Post(db.Document):
     url = db.StringField(max_length=250)
     sourceUrl = db.StringField(max_length=250)
     sourceTitle = db.StringField(max_length=250)
+    postUrl = db.StringField(max_length=250)
     lang = db.StringField(max_length=60)
     datetime = db.StringField(max_length=150, default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
@@ -119,6 +120,28 @@ def getPages(url=""):
         pageItems.append(page)
 
     return(pageItems)
+
+def getPosts(url=""):
+    posts = []
+    if url!="":
+        query = mongo_db.post.find( { 'postUrl': url } )
+    else:
+        query = mongo_db.post.find( { } )
+    for post in query:
+        posts.append(post)
+
+    print(posts)
+    return(posts)
+
+@app.route('/<post_url>')
+def show_post(post_url):
+    configItems = []
+    query = mongo_db.config.find().limit(1)
+    for item in query:
+        configItems.append(item)
+
+    return render_template('pages.html', configItems=configItems, posts = getPosts(post_url))
+
 
 @app.context_processor
 def inject_now():

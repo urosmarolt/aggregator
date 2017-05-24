@@ -1,6 +1,6 @@
 from eventregistry import *
-from apscheduler.schedulers.background import BackgroundScheduler
 from pymongo import MongoClient
+import re
 
 #client = MongoClient('localhost', 27017)
 client = MongoClient("mongodb://127.0.0.1:27017")
@@ -18,12 +18,11 @@ def pullItems():
     q.addKeyword(query[0]['aggregatorKeyword'])
     q.addConcept(er.getConceptUri(query[0]['aggregatorTheme']))
     # return details about the articles
-    q.addRequestedResult(RequestArticlesInfo(count=50,returnInfo=ReturnInfo(articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,categories=False, location=False,image=True))))
+    q.addRequestedResult(RequestArticlesInfo(count=200,returnInfo=ReturnInfo(articleInfo=ArticleInfoFlags(duplicateList=True, concepts=False,categories=False, location=False,image=True))))
     # execute the query
     res = er.execQuery(q)
 
     for item in res['articles']['results']:
-        print(item)
         try:
             #cleanup dict raw data structure
             del item["sim"]
@@ -34,6 +33,9 @@ def pullItems():
 
             item["sourceUrl"] = item["source"]["uri"]
             item["sourceTitle"] = item["source"]["title"]
+            #remove off characters, lowercase string and replace spaces with -
+            str = re.sub("['.:;\"()/?!|]", '', item["title"].lower())
+            item["postUrl"] = str.replace(' ', '-')
             del item["source"]
             item["datetime"] = item["date"] + " " + item["time"]
             del item["date"]
@@ -43,6 +45,7 @@ def pullItems():
             print(item["isDuplicate"])
             if item["isDuplicate"] == False:
                 del item["isDuplicate"]
+                print(item)
                 saveToDB(item)
         except Exception as e:
             print("Error \n %s" % (e))

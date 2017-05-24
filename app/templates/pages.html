@@ -65,74 +65,50 @@
     <!-- Page Content -->
     <div class="container">
 
+        <!-- Page Heading/Breadcrumbs -->
         <div class="row">
-
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
-
-                <!-- Blog Post -->
-                {% for item in newsItems %}
-                <h2 class="medium">
-                    <a href="{{ item.url }}" target="_blank" rel="nofollow, noindex">{{ item.title|replace("/r/", "") }}</a>
-                </h2>
-
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ item.datetime }}
-                 <span class="source">( source <a href="http://{{ item.sourceUrl }}" target="_blank" rel="nofollow, noindex">{{ item.sourceTitle }}</a> )</span>
-                </p>
-                {% if item.image %}
-                <img src="{{ item.image }}" class="pull-left gap-right align-top-right" width="100px" height="100px" />
-                {% else %}
-                <img src="static/images/defaultThumb.png" class="pull-left gap-right align-top-right" width="100px" />
-                {% endif %}
-                <hr class="line-align-left">
-                <p class="newsExtract">{{ item.body }}</p>
-                {% if item.postUrl is defined %}
-                <a class="btn btn-primary" href="{{ item.postUrl }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                {% else %}
-                <a class="btn btn-primary" href="{{ item.url }}" target="_blank" rel="nofollow, noindex">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                {% endif %}"
-
-                <hr class="hr-double">
-                {% endfor %}
-                <!-- Pager -->
-                {{ pagination.info }}
-                {{ pagination_links|safe}}
-
-
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ posts[0].title |safe }}
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a>
+                    </li>
+                    <li class="active">{{ posts[0].title |safe }}</li>
+                </ol>
             </div>
+        </div>
+        <!-- /.row -->
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-                <!-- Blog Twitter Widget -->
-                <div class="well">
-                    <h4>#fakeNews</h4>
-                    <div class="row pre-scrollable">
-                        <div class="col-md-5">
-                        <ul class="twitter-feed">
-                            {% for t in tweets %}
-                            <li class="twitter-tweet">
-                                <p>
-                                    {{ t.text }}
-                                    <br>
-                                     <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}" target="_blank" rel="nofollow,noindex"><span class="label label-info">@{{ t.user.screen_name }}</span></a> | <span class="label label-info">{{t.created_at|strftime}}</span>
-                                </p>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Sidebar Column -->
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="index.html" class="list-group-item">Home</a>
+                    <a href="about.html" class="list-group-item">About</a>
+                    <a href="services.html" class="list-group-item">Services</a>
+                    <a href="contact.html" class="list-group-item">Contact</a>
+                    <a href="portfolio-1-col.html" class="list-group-item">1 Column Portfolio</a>
+                    <a href="portfolio-2-col.html" class="list-group-item">2 Column Portfolio</a>
+                    <a href="portfolio-3-col.html" class="list-group-item">3 Column Portfolio</a>
+                    <a href="portfolio-4-col.html" class="list-group-item">4 Column Portfolio</a>
+                    <a href="portfolio-item.html" class="list-group-item">Single Portfolio Item</a>
+                    <a href="blog-home-1.html" class="list-group-item">Blog Home 1</a>
+                    <a href="blog-home-2.html" class="list-group-item">Blog Home 2</a>
+                    <a href="blog-post.html" class="list-group-item">Blog Post</a>
+                    <a href="full-width.html" class="list-group-item">Full Width Page</a>
+                    <a href="sidebar.html" class="list-group-item active">Sidebar Page</a>
+                    <a href="faq.html" class="list-group-item">FAQ</a>
+                    <a href="404.html" class="list-group-item">404</a>
+                    <a href="pricing.html" class="list-group-item">Pricing Table</a>
                 </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>{{ widgetItems[0].WidgetData[0].Title }}</h4>
-                    <p>{{ widgetItems[0].WidgetData[0].Body }}</p>
-                </div>
-
             </div>
-
+            <!-- Content Column -->
+            <div class="col-md-9">
+                <img src="{{ posts[0].image }}" width="450px" />
+                <p>{{ posts[0].body |safe }}</p>
+                <a class="btn btn-primary" href="{{ posts[0].url }}" target="_blank" rel="nofollow, noindex">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
         </div>
         <!-- /.row -->
 
